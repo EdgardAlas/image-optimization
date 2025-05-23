@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const OptimizationSettings = () => {
 	return (
-		<Card className='w-full gap-1 lg:h-[460px]'>
+		<Card className='w-full gap-1 lg:h-[400px]'>
 			<CardHeader>
 				<h2 className='font-bold'>Optimization Settings</h2>
 			</CardHeader>

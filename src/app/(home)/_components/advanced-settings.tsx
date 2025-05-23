@@ -113,38 +113,6 @@ export const AdvancedSettings = () => {
 					</FormItem>
 				)}
 			/>
-
-			<FormField
-				control={form.control}
-				name='removeMetadata'
-				render={({ field }) => (
-					<FormItem className='flex items-center space-x-2'>
-						<FormControl>
-							<Checkbox
-								checked={field.value}
-								onCheckedChange={field.onChange}
-							/>
-						</FormControl>
-						<FormLabel>Remove Metadata</FormLabel>
-					</FormItem>
-				)}
-			/>
-
-			<FormField
-				control={form.control}
-				name='preserveFileName'
-				render={({ field }) => (
-					<FormItem className='flex items-center space-x-2'>
-						<FormControl>
-							<Checkbox
-								checked={field.value}
-								onCheckedChange={field.onChange}
-							/>
-						</FormControl>
-						<FormLabel>Preserve File Name</FormLabel>
-					</FormItem>
-				)}
-			/>
 		</div>
 	);
 };
