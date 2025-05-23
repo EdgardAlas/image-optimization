@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
+import { Toaster } from '@/components/ui/sonner';
 
 const fontFamily = Geist_Mono({
 	subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({
 				>
 					{children}
 				</ThemeProvider>
+				<Toaster />
 			</body>
 		</html>
 	);
