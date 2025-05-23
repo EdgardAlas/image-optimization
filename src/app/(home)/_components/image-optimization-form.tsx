@@ -1,4 +1,5 @@
 'use client';
+
 import { OptimizationSettings } from '@/app/(home)/_components/optimization-settings';
 import { Card, CardContent } from '@/components/ui/card';
 

@@ -1,5 +1,4 @@
 import { optimizerBenefits } from '@/data/optimizer-benefits';
-import React from 'react';
 
 export const OptimizerInformation = () => {
 	return (
