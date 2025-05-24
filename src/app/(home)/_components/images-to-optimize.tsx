@@ -1,4 +1,4 @@
-import { Dropzone } from '@/app/(home)/_components/dropzone';
+import { UploadImagesDropzone } from '@/app/(home)/_components/upload-images-dropzone';
 import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,20 +31,7 @@ export const ImagesToOptimize = () => {
 				})}
 			>
 				{files?.length === 0 ? (
-					<Dropzone
-						title='Upload your images'
-						subtitle={'You can upload up to 20 images at once'}
-						onFilesChange={(files) => {
-							const images = form.getValues('images') || [];
-							form.setValue('images', [...images, ...files]);
-							toast.success(`${files.length} images added to the list!`);
-						}}
-						onFilesReject={() => {
-							toast.error(
-								'Some files were rejected. Please check the file types and sizes.'
-							);
-						}}
-					/>
+					<UploadImagesDropzone />
 				) : (
 					files.map((file, index) => (
 						<ImageToOptimizeItem file={file} key={index} index={index} />

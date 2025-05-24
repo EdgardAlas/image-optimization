@@ -44,8 +44,6 @@ export const ImageOptimizationForm = () => {
 
 				<Summary />
 			</FormProvider>
-
-			<pre>{JSON.stringify(form.watch(), null, 2)}</pre>
 		</>
 	);
 };

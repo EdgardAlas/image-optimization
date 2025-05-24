@@ -1,34 +1,17 @@
-import { Dropzone } from '@/app/(home)/_components/dropzone';
-import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
+import { UploadImagesDropzone } from '@/app/(home)/_components/upload-images-dropzone';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { formatBytes } from 'bytes-formatter';
 import clsx from 'clsx';
 import { Download, ImageIcon } from 'lucide-react';
-import { toast } from 'sonner';
 
 export const Summary = () => {
-	const form = useOptimizationSettingsForm();
-
 	return (
 		<Card className='col-span-12 max-h-[730px] overflow-y-auto lg:col-span-8'>
 			{true ? (
 				<CardContent className='h-full'>
-					<Dropzone
-						title='Upload your images'
-						subtitle={'You can upload up to 20 images at once'}
-						onFilesChange={(files) => {
-							const images = form.getValues('images') || [];
-							form.setValue('images', [...images, ...files]);
-							toast.success(`${files.length} images added to the list!`);
-						}}
-						onFilesReject={() => {
-							toast.error(
-								'Some files were rejected. Please check the file types and sizes.'
-							);
-						}}
-					/>
+					<UploadImagesDropzone />
 				</CardContent>
 			) : null}
 
