@@ -56,7 +56,7 @@ export const ImageOptimizationForm = () => {
 								<div className='flex items-center gap-4'>
 									<div className='h-10 w-10 rounded-full bg-slate-200' />
 									<div className='flex flex-col'>
-										<span className='font-medium text-slate-900'>
+										<span className='font-bold text-slate-500'>
 											Image {i + 1}
 										</span>
 										<span className='text-slate-500'>Size: 1.2 MB</span>

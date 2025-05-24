@@ -9,6 +9,9 @@ export const Header = () => {
 					Batch optimize multiple images at once. Reduce file sizes without
 					losing quality.
 				</p>
+				<small className='text-xs'>
+					We do not store your images, you can optimize up to 20 images at once.
+				</small>
 			</section>
 			<ToggleDarkMode />
 		</header>
