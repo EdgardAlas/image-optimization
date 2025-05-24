@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@ajoelp/json-to-formdata':
+        specifier: ^1.5.0
+        version: 1.5.0
       '@hookform/resolvers':
         specifier: ^5.0.1
         version: 5.0.1(react-hook-form@7.56.4(react@19.1.0))
@@ -116,6 +119,9 @@ importers:
         version: 5.8.3
 
 packages:
+
+  '@ajoelp/json-to-formdata@1.5.0':
+    resolution: {integrity: sha512-nrlfeTSL0X0dtx5r2KpzPiqLSIQquiiJjUKsQAKzWaCmO2QoYZCyb5ENZwF3YoffKronOCJr25mxaD8JRJmK8w==}
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -1763,6 +1769,9 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
@@ -2366,6 +2375,10 @@ packages:
     resolution: {integrity: sha512-Od2bdMosahjSrSgJtakrwjMDb1zM1A3VIHCPGveZt/3/wlrTWBya2lmEh2OYe4OIu8mPTmmr0gnLHIWQXdtWBg==}
 
 snapshots:
+
+  '@ajoelp/json-to-formdata@1.5.0':
+    dependencies:
+      lodash: 4.17.21
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -4083,6 +4096,8 @@ snapshots:
       p-locate: 5.0.0
 
   lodash.merge@4.6.2: {}
+
+  lodash@4.17.21: {}
 
   loose-envify@1.4.0:
     dependencies:
