@@ -7,16 +7,17 @@ import {
 	CardFooter,
 	CardHeader,
 } from '@/components/ui/card';
-import { imageFormats } from '@/data/image-formats';
 import { truncateString } from '@/lib/utils';
 import { formatBytes } from 'bytes-formatter';
 import clsx from 'clsx';
 import { Trash } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 export const ImagesToOptimize = () => {
 	const form = useOptimizationSettingsForm();
 	const files = form.watch('images');
+	const imageButtonRef = useRef<HTMLInputElement>(null);
 
 	return (
 		<Card className='w-full flex-1 gap-2'>
@@ -32,13 +33,21 @@ export const ImagesToOptimize = () => {
 				{files?.length === 0 ? (
 					<Dropzone
 						title='Upload your images'
-						subtitle={`Accepted formats: ${imageFormats
-							.map((format) => format.extension)
-							.join(', ')}`}
+						subtitle={'You can upload up to 20 images at once'}
+						onFilesChange={(files) => {
+							const images = form.getValues('images') || [];
+							form.setValue('images', [...images, ...files]);
+							toast.success(`${files.length} images added to the list!`);
+						}}
+						onFilesReject={() => {
+							toast.error(
+								'Some files were rejected. Please check the file types and sizes.'
+							);
+						}}
 					/>
 				) : (
 					files.map((file, index) => (
-						<ImageToOptimizeItem file={file} key={index} />
+						<ImageToOptimizeItem file={file} key={index} index={index} />
 					))
 				)}
 			</CardContent>
@@ -50,7 +59,7 @@ export const ImagesToOptimize = () => {
 							type='button'
 							variant='secondary'
 							onClick={() => {
-								toast.error('This feature is not yet implemented.');
+								imageButtonRef.current?.click();
 							}}
 							className='w-full'
 						>
@@ -60,7 +69,8 @@ export const ImagesToOptimize = () => {
 							type='button'
 							variant='destructive'
 							onClick={() => {
-								toast.error('This feature is not yet implemented.');
+								form.setValue('images', []);
+								toast.success('All images removed successfully');
 							}}
 							className='w-full'
 						>
@@ -69,27 +79,76 @@ export const ImagesToOptimize = () => {
 					</section>
 				</CardFooter>
 			) : null}
+
+			<input
+				ref={imageButtonRef}
+				type='file'
+				accept='image/*'
+				className='hidden'
+				onChange={(e) => {
+					const files = e.target.files;
+					if (files) {
+						const images = form.getValues('images') || [];
+						form.setValue('images', [...images, ...Array.from(files)]);
+					}
+				}}
+				multiple
+			/>
 		</Card>
 	);
 };
 
 type ImageToOptimizeItemProps = {
 	file: File;
+	index: number;
 };
 
-const ImageToOptimizeItem = ({ file }: ImageToOptimizeItemProps) => (
-	<div className='flex h-16 items-center justify-between border-b border-b-slate-200 px-4 text-xs last:border-b-0'>
-		<div className='flex items-center gap-4'>
-			<div className='h-10 w-10 rounded-full bg-slate-200' />
-			<div className='flex flex-col'>
-				<span className='font-bold text-slate-500'>
-					{truncateString(file.name, 20)}
-				</span>
-				<span className='text-slate-500'>Size: {formatBytes(file.size)}</span>
+const ImageToOptimizeItem = ({ file, index }: ImageToOptimizeItemProps) => {
+	const form = useOptimizationSettingsForm();
+
+	const [url, setUrl] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (file) {
+			const objectUrl = URL.createObjectURL(file);
+			setUrl(objectUrl);
+
+			return () => {
+				URL.revokeObjectURL(objectUrl);
+			};
+		}
+	}, [file]);
+
+	return (
+		<div className='flex h-16 items-center justify-between border-b border-b-slate-200 px-4 text-xs last:border-b-0'>
+			<div className='flex items-center gap-4'>
+				<div
+					className='h-10 w-10 rounded-full bg-slate-200'
+					style={{
+						backgroundImage: `url(${url})`,
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
+					}}
+				/>
+				<div className='flex flex-col'>
+					<span className='font-bold text-slate-500'>
+						{truncateString(file.name, 20)}
+					</span>
+					<span className='text-slate-500'>Size: {formatBytes(file.size)}</span>
+				</div>
 			</div>
+			<Button
+				type='button'
+				variant={'destructive'}
+				onClick={() => {
+					const images = form.getValues('images') || [];
+					const newImages = images.filter((_, i) => i !== index);
+					form.setValue('images', newImages);
+					toast.success('Image removed successfully');
+				}}
+			>
+				<Trash size={10} />
+			</Button>
 		</div>
-		<Button type='button' variant={'destructive'}>
-			<Trash size={10} />
-		</Button>
-	</div>
-);
+	);
+};

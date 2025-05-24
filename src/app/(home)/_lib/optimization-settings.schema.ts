@@ -41,14 +41,12 @@ export const optimizationSettingsSchema = z
 		}),
 		images: z
 			.array(
-				z
-					.instanceof(File)
-					.refine((file) => file.size <= fileSizeLimit, {
-						message: 'Each file must be 10MB or less',
-					})
+				z.instanceof(File).refine((file) => file.size <= fileSizeLimit, {
+					message: 'Each file must be 10MB or less',
+				})
 			)
 			.max(20, { message: 'You can upload up to 20 files' })
-			.nonempty({ message: 'At least one image is required' }),
+			.min(1, { message: 'At least one file is required' }),
 	})
 	.refine(
 		(data) =>

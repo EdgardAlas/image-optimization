@@ -1,8 +1,8 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { imageFormats } from '@/data/image-formats';
 import { cn } from '@/lib/utils';
+import { formatBytes } from 'bytes-formatter';
 import { Upload } from 'lucide-react';
 import { useCallback } from 'react';
 import { FileRejection, useDropzone } from 'react-dropzone';
@@ -25,7 +25,7 @@ export function Dropzone({
 	maxFiles = 5,
 	maxSize = 5 * 1024 * 1024, // 5MB
 	accept = {
-		'image/*': imageFormats.map((format) => format.extension),
+		'image/*': [],
 	},
 	className,
 	onFilesReject,
@@ -40,9 +40,7 @@ export function Dropzone({
 				onFilesChange?.(acceptedFiles);
 			}
 
-			// Log rejected files for debugging
 			if (rejectedFiles.length > 0) {
-				console.error('Rejected files:', rejectedFiles);
 				onFilesReject?.(rejectedFiles);
 			}
 		},
@@ -57,16 +55,6 @@ export function Dropzone({
 			maxFiles,
 			disabled,
 		});
-
-	const formatFileSize = (bytes: number) => {
-		if (bytes === 0) return '0 Bytes';
-		const k = 1024;
-		const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-		const i = Math.floor(Math.log(bytes) / Math.log(k));
-		return (
-			Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-		);
-	};
 
 	return (
 		<Card
@@ -100,7 +88,7 @@ export function Dropzone({
 					</p>
 					<p className='text-muted-foreground text-sm'>
 						{subtitle ||
-							`Supports images, PDFs, and text files up to ${formatFileSize(maxSize)}`}
+							`Supports images, PDFs, and text files up to ${formatBytes(maxSize)}`}
 					</p>
 					{smallText && (
 						<p className='text-muted-foreground text-xs'>
