@@ -1,6 +1,8 @@
+import { Dropzone } from '@/app/(home)/_components/dropzone';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { imageFormats } from '@/data/image-formats';
 import { formatBytes } from 'bytes-formatter';
 import clsx from 'clsx';
 import { Download, ImageIcon } from 'lucide-react';
@@ -8,33 +10,48 @@ import { Download, ImageIcon } from 'lucide-react';
 export const Summary = () => {
 	return (
 		<Card className='col-span-12 max-h-[730px] overflow-y-auto lg:col-span-8'>
-			<CardHeader className='flex items-center justify-between'>
-				<h2 className='font-bold'>Results</h2>
-				<Button>Download All</Button>
-			</CardHeader>
-			<CardContent className='space-y-8'>
-				<article className='bg-background text-foreground rounded-xl border'>
-					<header className='border-b p-4'>
-						<h3 className='font-bold'>Optimization Summary</h3>
-					</header>
-					<section className='grid gap-4 p-4 sm:grid-cols-2 md:grid-cols-4'>
-						<Metric title='Original size' value={formatBytes(1234567)} />
-						<Metric title='Optimized size' value={formatBytes(123456)} />
-						<Metric
-							title='Reduction'
-							value='52%'
-							valueClassName='text-green-700'
-						/>
-						<Metric title='Total images' value={10} />
-					</section>
-				</article>
+			{true ? (
+				<CardContent className='h-full'>
+					<Dropzone
+						title='Upload your images'
+						subtitle={`Accepted formats: ${imageFormats
+							.map((format) => format.extension)
+							.join(', ')}`}
+					/>
+				</CardContent>
+			) : null}
 
-				<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-					{uploadedImages.map((image) => (
-						<UploadedImageCard key={image.id} image={image} />
-					))}
-				</div>
-			</CardContent>
+			{false ? (
+				<>
+					<CardHeader className='flex items-center justify-between'>
+						<h2 className='font-bold'>Results</h2>
+						<Button>Download All</Button>
+					</CardHeader>
+					<CardContent className='space-y-8'>
+						<article className='bg-background text-foreground rounded-xl border'>
+							<header className='border-b p-4'>
+								<h3 className='font-bold'>Optimization Summary</h3>
+							</header>
+							<section className='grid gap-4 p-4 sm:grid-cols-2 md:grid-cols-4'>
+								<Metric title='Original size' value={formatBytes(1234567)} />
+								<Metric title='Optimized size' value={formatBytes(123456)} />
+								<Metric
+									title='Reduction'
+									value='52%'
+									valueClassName='text-green-700'
+								/>
+								<Metric title='Total images' value={10} />
+							</section>
+						</article>
+
+						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+							{uploadedImages.map((image) => (
+								<UploadedImageCard key={image.id} image={image} />
+							))}
+						</div>
+					</CardContent>
+				</>
+			) : null}
 		</Card>
 	);
 };

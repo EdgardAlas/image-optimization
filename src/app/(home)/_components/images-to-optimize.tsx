@@ -1,20 +1,21 @@
-import { OptimizationSettingsType } from '@/app/(home)/_lib/optimization-settings.schema';
+import { Dropzone } from '@/app/(home)/_components/dropzone';
+import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
 import { Button } from '@/components/ui/button';
-import { formatBytes } from 'bytes-formatter';
 import {
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 } from '@/components/ui/card';
+import { imageFormats } from '@/data/image-formats';
 import { truncateString } from '@/lib/utils';
-import { Trash } from 'lucide-react';
-import { useFormContext } from 'react-hook-form';
-import { toast } from 'sonner';
+import { formatBytes } from 'bytes-formatter';
 import clsx from 'clsx';
+import { Trash } from 'lucide-react';
+import { toast } from 'sonner';
 
 export const ImagesToOptimize = () => {
-	const form = useFormContext<OptimizationSettingsType>();
+	const form = useOptimizationSettingsForm();
 	const files = form.watch('images');
 
 	return (
@@ -29,9 +30,12 @@ export const ImagesToOptimize = () => {
 				})}
 			>
 				{files?.length === 0 ? (
-					<div className='flex h-full items-center justify-center'>
-						<p className='text-sm text-slate-500'>No images to optimize</p>
-					</div>
+					<Dropzone
+						title='Upload your images'
+						subtitle={`Accepted formats: ${imageFormats
+							.map((format) => format.extension)
+							.join(', ')}`}
+					/>
 				) : (
 					files.map((file, index) => (
 						<ImageToOptimizeItem file={file} key={index} />

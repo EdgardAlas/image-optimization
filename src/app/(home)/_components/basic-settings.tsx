@@ -1,4 +1,4 @@
-import { OptimizationSettingsType } from '@/app/(home)/_lib/optimization-settings.schema';
+import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
 	FormControl,
@@ -9,17 +9,17 @@ import {
 } from '@/components/ui/form';
 import {
 	Select,
+	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-	SelectContent,
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { imageFormats } from '@/data/image-formats';
-import { useFormContext } from 'react-hook-form';
 
 export const BasicSettings = () => {
-	const form = useFormContext<OptimizationSettingsType>();
+	const form = useOptimizationSettingsForm();
+
 	return (
 		<div className='flex flex-col gap-6'>
 			<FormField
