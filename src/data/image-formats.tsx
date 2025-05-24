@@ -1,7 +1,7 @@
 export const imageFormats = [
 	{
 		label: 'JPG',
-		value: 'jpeg',
+		value: 'jpg',
 	},
 	{
 		label: 'PNG',
@@ -20,4 +20,3 @@ export const imageFormats = [
 		value: 'webp',
 	},
 ];
-

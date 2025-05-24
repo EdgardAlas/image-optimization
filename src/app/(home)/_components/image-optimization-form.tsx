@@ -26,21 +26,25 @@ export const ImageOptimizationForm = () => {
 	});
 
 	return (
-		<FormProvider
-			className='grid w-full flex-1 gap-4 lg:min-h-[730px] lg:grid-cols-12 lg:gap-8'
-			form={form}
-			onSubmit={async (values) => {
-				// Handle form submission
-				console.log('Form submitted:', values);
-			}}
-		>
-			<section className='col-span-12 flex flex-col gap-4 lg:col-span-4 lg:gap-8'>
-				<ImagesToOptimize />
+		<>
+			<FormProvider
+				className='grid w-full flex-1 gap-4 lg:min-h-[730px] lg:grid-cols-12 lg:gap-8'
+				form={form}
+				onSubmit={async (values) => {
+					// Handle form submission
+					console.log('Form submitted:', values);
+				}}
+			>
+				<section className='col-span-12 flex flex-col gap-4 lg:col-span-4 lg:gap-8'>
+					<ImagesToOptimize />
 
-				<OptimizationSettings />
-			</section>
+					<OptimizationSettings />
+				</section>
 
-			<Summary />
-		</FormProvider>
+				<Summary />
+			</FormProvider>
+
+			<pre>{JSON.stringify(form.watch(), null, 2)}</pre>
+		</>
 	);
 };

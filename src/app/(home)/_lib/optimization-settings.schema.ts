@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const optimizationSettingsSchema = z
 	.object({
-		quality: z
+		quality: z.coerce
 			.number({ required_error: 'Quality is required' })
 			.min(1, { message: 'Quality must be at least 1' })
 			.max(100, { message: 'Quality cannot exceed 100' }),
@@ -15,11 +15,11 @@ export const optimizationSettingsSchema = z
 			required_error: 'Preserve file name is required',
 			invalid_type_error: 'Preserve file name must be a boolean',
 		}),
-		maxWidth: z
+		maxWidth: z.coerce
 			.number({ required_error: 'Max width is required' })
 			.min(1, { message: 'Max width must be at least 1' })
 			.optional(),
-		maxHeight: z
+		maxHeight: z.coerce
 			.number({ required_error: 'Max height is required' })
 			.min(1, { message: 'Max height must be at least 1' })
 			.optional(),
