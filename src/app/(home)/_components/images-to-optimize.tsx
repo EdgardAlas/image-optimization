@@ -20,7 +20,7 @@ export const ImagesToOptimize = () => {
 	return (
 		<Card className='w-full flex-1 gap-2'>
 			<CardHeader>
-				<h2 className='font-semibold'>Images to Optimize (0)</h2>
+				<h2 className='font-semibold'>Images to Optimize ({files?.length})</h2>
 			</CardHeader>
 			<CardContent
 				className={clsx({
