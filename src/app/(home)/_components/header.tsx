@@ -2,7 +2,7 @@ import { ToggleDarkMode } from '@/components/ui/toggle-dark-mode';
 
 export const Header = () => {
 	return (
-		<header className='flex w-full items-center justify-between'>
+		<header className='flex w-full items-center justify-between gap-8'>
 			<section className='space-y-1'>
 				<h1 className='text-2xl font-bold'>Image Optimizer</h1>
 				<p className='text-sm'>
