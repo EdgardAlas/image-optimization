@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { formatBytes } from 'bytes-formatter';
 import clsx from 'clsx';
 import { Download, ImageIcon } from 'lucide-react';
 
@@ -17,8 +18,8 @@ export const Summary = () => {
 						<h3 className='font-bold'>Optimization Summary</h3>
 					</header>
 					<section className='grid gap-4 p-4 sm:grid-cols-2 md:grid-cols-4'>
-						<Metric title='Original size' value='2.5 MB' />
-						<Metric title='Optimized size' value='1.2 MB' />
+						<Metric title='Original size' value={formatBytes(1234567)} />
+						<Metric title='Optimized size' value={formatBytes(123456)} />
 						<Metric
 							title='Reduction'
 							value='52%'
@@ -40,7 +41,7 @@ export const Summary = () => {
 
 type MetricProps = {
 	title: string;
-	value: React.ReactNode;
+	value: string | number;
 	titleClassName?: string;
 	valueClassName?: string;
 };
@@ -60,8 +61,8 @@ const Metric = ({
 type UploadedImage = {
 	id: number;
 	name: string;
-	originalSize?: string;
-	newSize?: string;
+	originalSize?: number;
+	newSize?: number;
 	reduction?: string;
 };
 
@@ -69,36 +70,36 @@ const uploadedImages: UploadedImage[] = [
 	{
 		id: 1,
 		name: 'vacation-photo.jpg',
-		originalSize: '300KB',
-		newSize: '120KB',
+		originalSize: 300,
+		newSize: 120,
 		reduction: '60%',
 	},
 	{
 		id: 2,
 		name: 'product-image.png',
-		originalSize: '500KB',
-		newSize: '200KB',
+		originalSize: 500,
+		newSize: 200,
 		reduction: '60%',
 	},
 	{
 		id: 3,
 		name: 'profile-picture.jpg',
-		originalSize: '150KB',
-		newSize: '60KB',
+		originalSize: 150,
+		newSize: 60,
 		reduction: '60%',
 	},
 	{
 		id: 4,
 		name: 'banner-image.png',
-		originalSize: '800KB',
-		newSize: '320KB',
+		originalSize: 800,
+		newSize: 320,
 		reduction: '60%',
 	},
 	{
 		id: 5,
 		name: 'landscape.jpg',
-		originalSize: '700KB',
-		newSize: '280KB',
+		originalSize: 700,
+		newSize: 280,
 		reduction: '60%',
 	},
 ];
@@ -120,8 +121,11 @@ const UploadedImageCard = ({ image }: UploadedImageCardProps) => (
 				</Badge>
 			</div>
 			<div className='text-muted-foreground mt-2 flex justify-between text-xs'>
-				<span>Original: {image.originalSize ?? 'N/A'}</span>
-				<span>New: {image.newSize ?? 'N/A'}</span>
+				<span>
+					Original:{' '}
+					{image.originalSize ? formatBytes(image.originalSize) : 'N/A'}
+				</span>
+				<span>New: {image.newSize ? formatBytes(image.newSize) : 'N/A'}</span>
 			</div>
 			<div className='mt-3 flex justify-end'>
 				<Button variant='ghost' size='sm' className='h-7 px-2'>

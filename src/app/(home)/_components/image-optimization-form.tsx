@@ -21,6 +21,7 @@ export const ImageOptimizationForm = () => {
 			resizeMode: 'contain',
 			modifyDimensions: false,
 			removeMetadata: false,
+			images: [],
 		},
 		resolver: optimizationSettingsSchemaResolver,
 	});
