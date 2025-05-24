@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
+const fileSizeLimit = 10 * 1024 * 1024; // 10 MB
+
 export const optimizationSettingsSchema = z
 	.object({
 		quality: z.coerce
@@ -37,6 +39,16 @@ export const optimizationSettingsSchema = z
 			required_error: 'Remove metadata is required',
 			invalid_type_error: 'Remove metadata must be a boolean',
 		}),
+		images: z
+			.array(
+				z
+					.instanceof(File)
+					.refine((file) => file.size <= fileSizeLimit, {
+						message: 'Each file must be 10MB or less',
+					})
+			)
+			.max(20, { message: 'You can upload up to 20 files' })
+			.nonempty({ message: 'At least one image is required' }),
 	})
 	.refine(
 		(data) =>
