@@ -10,7 +10,7 @@ export const optimizationSettingsSchema = z
 			.number({ required_error: 'Quality is required' })
 			.min(1, { message: 'Quality must be at least 1' })
 			.max(100, { message: 'Quality cannot exceed 100' }),
-		outputFormat: z.enum(['jpg', 'png', 'webp', 'avif'], {
+		outputFormat: z.enum(['jpg', 'png', 'webp', 'avif', 'svg', 'jpeg'], {
 			required_error: 'Output format is required',
 			invalid_type_error: 'Invalid output format',
 		}),
