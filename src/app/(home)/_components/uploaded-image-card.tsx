@@ -44,12 +44,12 @@ export const UploadedImageCard = ({ image }: UploadedImageCardProps) => {
 								decoding='async'
 							/>
 						</DialogTrigger>
-						<DialogContent className='h-[90dvh] !max-w-[90dvw]'>
+						<DialogContent className='flex h-[90dvh] !max-w-[90dvw] flex-col'>
 							<DialogHeader>
 								<DialogTitle>Optimized Image</DialogTitle>
 							</DialogHeader>
 							<ReactCompareSlider
-								className='w-full'
+								className='h-full w-full'
 								itemOne={
 									<ReactCompareSliderImage
 										src={image.imageBase64}
