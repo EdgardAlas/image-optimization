@@ -1,4 +1,4 @@
-import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
+import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
 	FormControl,
@@ -18,7 +18,7 @@ import { Slider } from '@/components/ui/slider';
 import { imageFormats } from '@/data/image-formats';
 
 export const BasicSettings = () => {
-	const form = useOptimizationSettingsForm();
+	const form = useOptimizationSettingsContext();
 
 	return (
 		<div className='flex flex-col gap-6'>

@@ -1,4 +1,4 @@
-import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
+import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
 	FormControl,
@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/select';
 
 export const AdvancedSettings = () => {
-	const form = useOptimizationSettingsForm();
+	const form = useOptimizationSettingsContext();
 
 	const modifyDimensions = form.watch('modifyDimensions');
 

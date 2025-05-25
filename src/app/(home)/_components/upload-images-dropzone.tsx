@@ -1,10 +1,10 @@
 import { Dropzone } from '@/app/(home)/_components/dropzone';
-import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
+import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
 import React from 'react';
 import { toast } from 'sonner';
 
 export const UploadImagesDropzone = () => {
-	const form = useOptimizationSettingsForm();
+	const form = useOptimizationSettingsContext();
 
 	return (
 		<Dropzone

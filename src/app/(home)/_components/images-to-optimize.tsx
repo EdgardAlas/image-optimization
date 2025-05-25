@@ -1,5 +1,5 @@
 import { UploadImagesDropzone } from '@/app/(home)/_components/upload-images-dropzone';
-import { useOptimizationSettingsForm } from '@/app/(home)/_hooks/use-optimization-settings-form';
+import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
 import { Button } from '@/components/ui/button';
 import {
 	Card,
@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 export const ImagesToOptimize = () => {
-	const form = useOptimizationSettingsForm();
+	const form = useOptimizationSettingsContext();
 	const files = form.watch('images');
 	const imageButtonRef = useRef<HTMLInputElement>(null);
 
@@ -91,7 +91,7 @@ type ImageToOptimizeItemProps = {
 };
 
 const ImageToOptimizeItem = ({ file, index }: ImageToOptimizeItemProps) => {
-	const form = useOptimizationSettingsForm();
+	const form = useOptimizationSettingsContext();
 
 	const [url, setUrl] = useState<string | null>(null);
 
