@@ -5,6 +5,7 @@ const fileSizeLimit = 10 * 1024 * 1024; // 10 MB
 
 export const optimizationSettingsSchema = z
 	.object({
+		base64Images: z.array(z.string()).optional(),
 		quality: z.coerce
 			.number({ required_error: 'Quality is required' })
 			.min(1, { message: 'Quality must be at least 1' })

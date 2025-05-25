@@ -48,7 +48,13 @@ export const Summary = () => {
 			{response ? (
 				<>
 					<CardHeader className='flex items-center justify-between'>
-						<h2 className='font-bold'>Results</h2>
+						<div>
+							<h2 className='font-bold'>Results</h2>
+							<small className='text-xs'>
+								You can click on each image to compare the original and
+								optimized versions.
+							</small>
+						</div>
 						<Button type='button' onClick={handleDownloadAll}>
 							Download All
 						</Button>

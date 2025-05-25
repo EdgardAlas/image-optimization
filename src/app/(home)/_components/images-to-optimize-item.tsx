@@ -55,6 +55,9 @@ export const ImageToOptimizeItem = ({
 					const images = form.getValues('images') || [];
 					const newImages = images.filter((_, i) => i !== index);
 					form.setValue('images', newImages);
+					const base64Images = form.getValues('base64Images') || [];
+					const newBase64Images = base64Images.filter((_, i) => i !== index);
+					form.setValue('base64Images', newBase64Images);
 					toast.success('Image removed successfully');
 				}}
 			>

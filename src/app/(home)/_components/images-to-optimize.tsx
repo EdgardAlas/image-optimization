@@ -1,6 +1,7 @@
 import { ImageToOptimizeItem } from '@/app/(home)/_components/images-to-optimize-item';
 import { UploadImagesDropzone } from '@/app/(home)/_components/upload-images-dropzone';
 import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
+import { fileToBase64 } from '@/app/(home)/_lib/file-to-base64';
 import { Button } from '@/components/ui/button';
 import {
 	Card,
@@ -55,6 +56,7 @@ export const ImagesToOptimize = () => {
 							variant='destructive'
 							onClick={() => {
 								form.setValue('images', []);
+								form.setValue('base64Images', []);
 								toast.success('All images removed successfully');
 							}}
 							className='w-full'
@@ -70,11 +72,19 @@ export const ImagesToOptimize = () => {
 				type='file'
 				accept='image/*'
 				className='hidden'
-				onChange={(e) => {
+				onChange={async (e) => {
 					const files = e.target.files;
 					if (files) {
 						const images = form.getValues('images') || [];
 						form.setValue('images', [...images, ...Array.from(files)]);
+						const base64Images: string[] = [];
+						for (const file of files) {
+							base64Images.push(await fileToBase64(file));
+						}
+						form.setValue('base64Images', [
+							...(form.getValues('base64Images') || []),
+							...base64Images,
+						]);
 					}
 				}}
 				multiple

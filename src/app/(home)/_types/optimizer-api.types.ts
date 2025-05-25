@@ -13,6 +13,7 @@ export interface OptimizedImage {
 	optimizedSize: number;
 	reduction: number;
 	imageBase64: string;
+	originalImage: string;
 }
 
 export interface UsedOptions {

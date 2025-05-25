@@ -27,7 +27,10 @@ export const useImageOptimizationForm = () => {
 		resolver: optimizationSettingsSchemaResolver,
 	});
 
-	const onSubmit = async (values: OptimizationSettingsType) => {
+	const onSubmit = async ({
+		base64Images,
+		...values
+	}: OptimizationSettingsType) => {
 		const formData = jsonToFormData(values);
 
 		const id = toast.loading('Optimizing images...');
@@ -35,7 +38,13 @@ export const useImageOptimizationForm = () => {
 		try {
 			setResponse(null);
 			const response = await optimizeImages(formData);
-			setResponse(response.data);
+			setResponse({
+				...response.data,
+				images: response.data.images.map((image, i) => ({
+					...image,
+					originalImage: base64Images?.[i] as string,
+				})),
+			});
 
 			toast.success('Images optimized successfully', { id });
 		} catch (error) {
