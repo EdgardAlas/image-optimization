@@ -1,5 +1,6 @@
 import { AdvancedSettings } from '@/app/(home)/_components/advanced-settings';
 import { BasicSettings } from '@/app/(home)/_components/basic-settings';
+import { useOptimizationSettingsContext } from '@/app/(home)/_hooks/use-optimization-settings-context';
 import {
 	Card,
 	CardContent,
@@ -10,6 +11,8 @@ import { LoadingButton } from '@/components/ui/loading-button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const OptimizationSettings = () => {
+	const form = useOptimizationSettingsContext();
+
 	return (
 		<Card className='w-full gap-1 lg:h-[400px]'>
 			<CardHeader>
@@ -30,7 +33,9 @@ export const OptimizationSettings = () => {
 				</Tabs>
 			</CardContent>
 			<CardFooter className='mt-4'>
-				<LoadingButton className='w-full'>Optimize Images</LoadingButton>
+				<LoadingButton className='w-full' loading={form.formState.isSubmitting}>
+					Optimize Images
+				</LoadingButton>
 			</CardFooter>
 		</Card>
 	);
