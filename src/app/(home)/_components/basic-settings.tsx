@@ -54,11 +54,11 @@ export const BasicSettings = () => {
 						<FormLabel>Output Format</FormLabel>
 						<FormControl>
 							<Select onValueChange={field.onChange} defaultValue={field.value}>
-								<SelectTrigger className='w-full'>
-									<SelectValue
-										placeholder='Select output format'
-										aria-label='Select output format'
-									/>
+								<SelectTrigger
+									className='w-full'
+									aria-label='Select output format'
+								>
+									<SelectValue placeholder='Select output format' />
 								</SelectTrigger>
 								<SelectContent>
 									{imageFormats.map((format) => (
