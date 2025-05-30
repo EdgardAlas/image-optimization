@@ -72,6 +72,7 @@ export const ImagesToOptimize = () => {
 				type='file'
 				accept='image/*'
 				className='hidden'
+				aria-hidden='true'
 				onChange={async (e) => {
 					const files = e.target.files;
 					if (files) {
