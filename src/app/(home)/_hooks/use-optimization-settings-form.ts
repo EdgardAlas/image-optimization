@@ -42,7 +42,7 @@ export const useImageOptimizationForm = () => {
 			umami.track('optimize_images', {
 				quality: values.quality,
 				outputFormat: values.outputFormat,
-				resizeMode: values.resizeMode,
+				resizeMode: values.modifyDimensions ? values.resizeMode : 'none',
 				modifyDimensions: values.modifyDimensions,
 				removeMetadata: values.removeMetadata,
 				imagesCount: values.images.length,
