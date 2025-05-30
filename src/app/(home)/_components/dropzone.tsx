@@ -59,7 +59,7 @@ export function Dropzone({
 
 	return (
 		<Card
-			{...getRootProps()}
+			{...getRootProps({ 'aria-label': 'dropzone' })}
 			className={cn(
 				'border-muted-foreground/25 hover:border-muted-foreground/50 h-full cursor-pointer border-2 border-dashed transition-colors',
 				isDragActive && 'border-primary bg-primary/5',
