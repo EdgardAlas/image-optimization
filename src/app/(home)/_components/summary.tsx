@@ -25,6 +25,8 @@ export const Summary = () => {
 
 		const blob = await zip.generateAsync({ type: 'blob' });
 
+		umami.track('download_all_images');
+
 		const link = document.createElement('a');
 		link.href = URL.createObjectURL(blob);
 		link.download = 'optimized-images.zip';

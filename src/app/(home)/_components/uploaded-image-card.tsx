@@ -22,6 +22,10 @@ type UploadedImageCardProps = {
 
 export const UploadedImageCard = ({ image }: UploadedImageCardProps) => {
 	const handleDownload = () => {
+		umami.track('download_image', {
+			imageName: image.fileName,
+			imageSize: image.optimizedSize,
+		});
 		const link = document.createElement('a');
 		link.href = image.imageBase64;
 		link.download = image.fileName;
