@@ -38,6 +38,16 @@ export const useImageOptimizationForm = () => {
 		try {
 			setResponse(null);
 			const response = await optimizeImages(formData);
+
+			umami.track('optimize_images', {
+				quality: values.quality,
+				outputFormat: values.outputFormat,
+				resizeMode: values.resizeMode,
+				modifyDimensions: values.modifyDimensions,
+				removeMetadata: values.removeMetadata,
+				imagesCount: values.images.length,
+			});
+
 			setResponse({
 				...response.data,
 				images: response.data.images.map((image, i) => ({
