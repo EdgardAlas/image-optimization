@@ -8,7 +8,10 @@ export const ToggleDarkMode = () => {
 	const { setTheme, theme } = useTheme();
 
 	return (
-		<Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+		<Button
+			onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+			aria-label='Toggle dark mode'
+		>
 			{theme === 'dark' ? <Sun /> : <Moon />}
 		</Button>
 	);
